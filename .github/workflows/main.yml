@@ -17,14 +17,14 @@ jobs:
           git clone --depth 1 https://github.com/Rinnegatamante/math-neon
           make -C math-neon install
           git clone --depth 1 https://github.com/Rinnegatamante/vitaShaRK
+          sed -i 's|^//#define DISABLE_SHACCCG_EXTENSIONS|#define DISABLE_SHACCCG_EXTENSIONS|' vitaShaRK/source/vitashark.c
           make -C vitaShaRK install
           git clone --depth 1 https://github.com/Rinnegatamante/vitaGL
-          make -C vitaGL -j4 install
+          make -C vitaGL HAVE_VITA3K_SUPPORT=1 -j4 install
 
       - name: Build VPK
         run: |
           PROJ=$(dirname "$(find "$GITHUB_WORKSPACE" -name CMakeLists.txt | head -1)")
-          echo "Project folder: $PROJ"
           mkdir -p /tmp/build
           cd /tmp/build
           cmake "$PROJ"
