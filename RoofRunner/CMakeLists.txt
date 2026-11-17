@@ -21,9 +21,11 @@ add_executable(${PROJECT_NAME} src/main.c)
 
 target_link_libraries(${PROJECT_NAME}
   vitaGL
-  mathneon
   vitashark
+  SceShaccCgExt
   SceShaccCg_stub
+  mathneon
+  stdc++
   SceKernelDmacMgr_stub
   taihen_stub
   SceGxm_stub
