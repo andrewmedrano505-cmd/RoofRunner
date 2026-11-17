@@ -13,6 +13,7 @@ jobs:
 
       - name: Install build dependencies
         run: |
+          cd /tmp
           git clone --depth 1 https://github.com/Rinnegatamante/math-neon
           make -C math-neon install
           git clone --depth 1 https://github.com/Rinnegatamante/vitaShaRK
@@ -22,13 +23,15 @@ jobs:
 
       - name: Build VPK
         run: |
-          mkdir build
-          cd build
-          cmake ..
+          PROJ=$(dirname "$(find "$GITHUB_WORKSPACE" -name CMakeLists.txt | head -1)")
+          echo "Project folder: $PROJ"
+          mkdir -p /tmp/build
+          cd /tmp/build
+          cmake "$PROJ"
           make
 
       - name: Upload VPK
         uses: actions/upload-artifact@v4
         with:
           name: RoofRunner-vpk
-          path: build/RoofRunner.vpk
+          path: /tmp/build/RoofRunner.vpk
