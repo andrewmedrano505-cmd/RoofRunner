@@ -776,7 +776,6 @@ int main(void)
 {
     sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
     vglInitExtended(0, SCR_W, SCR_H, 0x1000000, SCE_GXM_MULTISAMPLE_NONE);
-    vglUseVram(GL_TRUE);
 
     buildLevel();
     loadBest();
